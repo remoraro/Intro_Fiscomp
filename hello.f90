@@ -1,4 +1,4 @@
 program hello
-  ! This is a comment line; it is ignored by the compiler
+  ! comentários são feitos com o ponto de exclamação
   print *, 'Hello, World!'
 end program hello
