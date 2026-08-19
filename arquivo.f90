@@ -2,14 +2,14 @@ program arquivo
     implicit none
     
     
-    integer:: M, N, pos, i, j
+    integer:: M, N, pos, i
     integer :: unit_in, unit_out, status
-    real(8) :: valor1, valor2, menor
-    real, allocatable:: menores(:)
+    real(8) :: valor1
+    real(8), allocatable :: menores(:)
     character(len=22) :: arq_entrada, arq_saida
 
     arq_entrada = 'tarefa-3-entrada-1.in'
-    arq_saida   = 'tarefa-3-entrada-1.txt'
+    arq_saida   = 'tarefa-3-saida-1.txt'
     unit_in     = 10
     unit_out    = 11
 
@@ -32,7 +32,6 @@ program arquivo
     
     ! Conta quantos elementos tem
     N = 0
-    menor = 10e10
     do
         ! Lê do arquivo de entrada
         read(unit_in, *, iostat=status) valor1
@@ -52,48 +51,45 @@ program arquivo
     do
         write(*,*) "Digite o valor de M: "
         read(*,*) M
-        if (M > N) then
-            print *, "O valor de M é menor que ", N, " escolha um menor"
+        if (M <= 0 .or. M > N) then
+            print *, "M deve estar entre 1 e ", N
         else
             exit
         end if
     end do
 
     allocate(menores(M))
-    menores = huge(1.0)
+    menores = huge(0.0d0)
 
 
-
-    ! Loop de Escrita
+    ! Relê o arquivo e mantém os M menores em ordem crescente.
+    rewind(unit_in)
     do
+        read(unit_in, *, iostat=status) valor1
         if (status < 0) then
-            print *, "Fim do arquivo"
-            exit ! Fim do arquivo (EOF) atingido com sucesso
+            exit
         else if (status > 0) then
             print *, "Erro de leitura nos dados!"
             exit
         end if
-        
-        ! Escreve no arquivo de saída
+
         if (valor1 < menores(M)) then
             pos = M
             do i = M - 1, 1, -1
-                if (valor1 < menores(M)) then
+                if (valor1 < menores(i)) then
+                    menores(i + 1) = menores(i)
                     pos = i
                 else
                     exit
                 end if
             end do
 
-            do j = M, pos + 1, -1
-                menores(j) = menores(j - 1)
-            end do
-
             menores(pos) = valor1
         end if
+    end do
 
-        write(unit_out, *) valor1
-        N = N + 1
+    do i = 1, M
+        write(unit_out, *) menores(i)
     end do
 
 
@@ -102,10 +98,8 @@ program arquivo
     close(unit_out)
 
     print *, "Cópia concluída com sucesso!"
-    print *, "O arquivo tem ", N, " numeros"
-    print *, "O ", M
+    print *, "Os ", M, " menores numeros sao:"
     do i = 1, M
         print *, menores(i)
-        print *, i
     end do
 end program arquivo
