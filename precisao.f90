@@ -22,15 +22,4 @@ program precisao
   print *, 'precisao da variavel 2: ', precision(valor2)
   print *, 'precisao da variavel 3: ', precision(valor3)
 
-
-
-
-  ! use, intrinsic :: iso_fortran_env, only: sp=>real32, dp=>real64
-
-  ! real(sp) :: float32
-  ! real(dp) :: float64
-
-  ! float32 = 1.0_sp  ! Explicit suffix for literal constants
-  ! float64 = 1.0_dp
-  ! print*, float32, float64
 end program precisao
