@@ -65,7 +65,7 @@ contains ! Aqui é como se fosse o def do python, em fortran vem depois do progr
             do j = i + 1, 4 ! vai do item da direita até o fim
 
                 ! se eles forem iguais, ele agora é zero
-                if (abs(v(i)-v(j)) < eps) then 
+                if (abs(v(i)-v(j)) < eps) then
                     v(i) = 0.0
                 end if
 
