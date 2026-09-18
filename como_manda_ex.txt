@@ -1,0 +1,5 @@
+scp /home/a14801142/Downloads/Intro_Fiscomp/exerA.f90 /public/fiscomp2026-2-guilherme/proj1/proj1_14801142
+
+pra ver se foi:
+a14801142@rubi4:/home$               cd /public/fiscomp2026-2-guilherme/proj1/proj1_14801142
+a14801142@rubi4:/public/fiscomp2026-2-guilherme/proj1/proj1_14801142$               ls
