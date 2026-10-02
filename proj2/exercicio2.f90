@@ -1,8 +1,7 @@
 program exercicio2
     implicit none
 
-    integer :: i, j, num_N, N
-    integer :: unidade_in, unidade_out
+    integer :: i, j, num_N, N, unidade_in, unidade_out
     integer :: melhor_N_trapezio, melhor_N_simpsons, melhor_N_bode
     integer, allocatable :: Ns(:)
 
@@ -78,6 +77,7 @@ program exercicio2
         write(unidade_out,123) N, " |",  h, " |",erro_trapezio, " |" &
         , erro_simpsons, " |", erro_bode
         123 format(I4,1A, ES17.10, 1A, ES17.10, 1A, ES17.10, 1A, ES17.10)
+        !write(unidade_out, *) N, h, erro_trapezio, erro_simpsons, , erro_bode
 
 
         if (abs(erro_trapezio) < abs(menor_erro_trapezio)) then

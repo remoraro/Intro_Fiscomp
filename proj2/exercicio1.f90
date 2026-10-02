@@ -1,8 +1,7 @@
 program exercicio1
     implicit none
 
-    integer :: i, num_h
-    integer :: unidade_in, unidade_out
+    integer :: i, num_h, unidade_in, unidade_out
 
     real(8) :: f_linha_frente, f_linha_tras, f_linha_sim_3, f_linha_sim_5
     real(8) :: f_linhalinha_5, f_linhalinhalinha_5
