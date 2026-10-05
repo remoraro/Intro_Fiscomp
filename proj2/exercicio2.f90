@@ -74,10 +74,10 @@ program exercicio2
         erro_simpsons = integral_simpsons - exata
         erro_bode = integral_bode - exata
 
-        write(unidade_out,123) N, " |",  h, " |",erro_trapezio, " |" &
-        , erro_simpsons, " |", erro_bode
-        123 format(I4,1A, ES17.10, 1A, ES17.10, 1A, ES17.10, 1A, ES17.10)
-        !write(unidade_out, *) N, h, erro_trapezio, erro_simpsons, , erro_bode
+        ! write(unidade_out,123) N, " |",  h, " |",erro_trapezio, " |" &
+        ! , erro_simpsons, " |", erro_bode
+        ! 123 format(I4,1A, ES17.10, 1A, ES17.10, 1A, ES17.10, 1A, ES17.10)
+        write(unidade_out, *) N, h, erro_trapezio, erro_simpsons, erro_bode
 
 
         if (abs(erro_trapezio) < abs(menor_erro_trapezio)) then
