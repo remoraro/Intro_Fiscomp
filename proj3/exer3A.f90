@@ -1,19 +1,51 @@
 program exer3A
     implicit none
 
-    real(8) :: v, tesao, deltat
-    real(8), parameter :: m = 80.0d0, pot = 400.0d0
-    integer :: i, unidade_out
+    real(8) :: w, wi, m, l, theta, thetai, deltat, tesao, t, energia, constante1, constante2
+    real(8), parameter :: g = 9.8d0, pi = 3.14159265358979323846d0
+    integer :: unidade_out!, unidade_energia
 
-    read *, tesao, deltat, v
+    read(*,*) m
+    read(*,*) l
+    read(*,*) theta
+    read(*,*) deltat
+    read(*,*) tesao
 
-    unidade_out = 11
-    open(unit=unidade_out, file="vel1_out.dat", status="replace")
+    unidade_out = 10
+    !unidade_energia = 11
+    open(unit=unidade_out, file="exer3A_out.dat", status="replace")
+    !open(unit=unidade_energia, file="energia3A.dat", status="replace")
     
-    do i = 0, int(tesao) - 1, int(deltat)
+    theta = theta * pi / 180.0d0
+    
+    w = 0.0d0
+    t = 0.0d0
+    constante1 = m * l * l * 0.5d0
+    constante2 = m * g * l * 0.5d0
+    do while (t <= tesao)
 
-        write(unidade_out, *) i, v
-        v = v + pot * deltat / (m * v)
+        do
+            if (theta > pi) then
+                theta = theta - 2.0d0 * pi
+            else if (theta < -pi) then
+                theta = theta + 2.0d0 * pi
+            else
+                exit
+            end if
+        end do
+        
+        write(unidade_out, *) t, theta
+
+        energia = constante1 * w * w  + constante2 * theta * theta 
+        !write(unidade_energia, *) t, energia
+        
+        thetai = theta + w * deltat
+        wi = w - g * theta * deltat / l
+
+        theta = thetai
+        w = wi
+
+        t = t + deltat 
 
     end do
 
