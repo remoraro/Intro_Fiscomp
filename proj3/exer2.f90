@@ -1,7 +1,7 @@
 program exer2
     implicit none
 
-    real(8) :: vy, vx, y, x, angulo, xmax
+    real(8) :: vy, vx, y, x, angulo, t
     real(8), parameter :: deltat = 0.1d0, v = 500.0d0, g = 9.8d0
     integer :: unidade_out, unidade_out2
 
@@ -16,44 +16,44 @@ program exer2
     vx = v * cos(angulo * 3.141592653593d0 / 180.0d0)
     x = 0.0d0
     y = 0.0d0
-    xmax = 0.0d0
     do 
 
         write(unidade_out, *) x, y
         
         x = x + vx * deltat
         y = y + vy * deltat
-        if (x > xmax) then
-            xmax = x
-        end if
         vy = vy - g * deltat
         
         if (y <= 0.0d0) then
+            write(unidade_out, *) vx * (2.0d0 * v * &
+            & sin(angulo * 3.141592653593d0 / 180.0d0)) / g, 0.0d0
             exit
         end if
     
     end do
 
     vy = v * sin(45.0d0 * 3.141592653593d0 / 180.0d0)
-    vx = v * cos(45.0d0 * 3.141592653593d0 / 180.0d0)
+    vy = v * cos(45.0d0 * 3.141592653593d0 / 180.0d0)
     x = 0.0d0
     y = 0.0d0
-
-    do 
+    t = deltat
+    do
 
         write(unidade_out2, *) x, y
         
-        x = x + vx * deltat
-        y = y + vy * deltat
-        vy = vy - g * deltat
-        
+        x = vx * t
+        y = vy * t - g * t * t * 0.5d0
+        ! s = s0 + vot - gt^2 / 2
+
         if (y <= 0.0d0) then
             exit
         end if
+
+        t = t + deltat
     
     end do
 
-    print *, xmax
+    write(unidade_out2, *) vx * (2.0d0 * vy) / g, 0.0d0
 
     close(unidade_out)
     close(unidade_out2)
